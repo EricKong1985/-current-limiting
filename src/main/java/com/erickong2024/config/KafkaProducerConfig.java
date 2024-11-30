@@ -1,6 +1,5 @@
 package com.erickong2024.config;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -32,7 +31,6 @@ public class KafkaProducerConfig {
         props.put("enable.idempotence", "false");  // 不启用幂等性
         props.put("retries", 0);  // 不重试，消息失败即返回
 
-//
         return new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(props));
     }
 

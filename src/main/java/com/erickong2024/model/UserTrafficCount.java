@@ -4,7 +4,6 @@ package com.erickong2024.model;
 public class UserTrafficCount {
     private String userId;
 
-
     public String getUserId() {
         return userId;
     }

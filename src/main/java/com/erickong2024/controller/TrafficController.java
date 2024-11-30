@@ -28,7 +28,6 @@ public class TrafficController {
     @GetMapping("/api1")
     public ResponseEntity<String> handleApi1Request(
             @RequestHeader(value = "token", required = false) String token) {
-//        System.out.println("api1");
         UserRequest userRequest = new UserRequest();
         userRequest.setPath("api1");
         userRequest.setToken(token);
@@ -53,7 +52,7 @@ public class TrafficController {
     // 处理 API3 的 PUT 请求
     @PutMapping("/api3")
     public ResponseEntity<String> handleApi3Request(
-                                                    @RequestHeader(value = "token", required = false) String token) {
+            @RequestHeader(value = "token", required = false) String token) {
         UserRequest userRequest = new UserRequest();
         userRequest.setPath("api3");
         userRequest.setToken(token);
@@ -63,16 +62,12 @@ public class TrafficController {
     // 通用请求处理逻辑
     private ResponseEntity<String> handleRequest(UserRequest userRequest) {
 
-//        System.out.println(JSON.toJSONString(userRequest));
-
         userRequest.setTimestamp(Long.valueOf(StringUtils.getMinutesSince1970()));
 
-        // Check if the token is empty
         if (userRequest.getToken() == null || userRequest.getToken().isEmpty()) {
             String body = Resp.toJSON(Resp.failed("Token cannot be empty"));
             return ResponseEntity.status(HttpStatus.OK).body(body);
         }
-
         // 根据 token 获取用户对象，假设存在一个 UserService
         User user = userService.getUserByToken(userRequest.getToken());
         if (user == null) {
@@ -84,14 +79,12 @@ public class TrafficController {
         userRequest.setUser(user);
         // 记录请求到 Kafka
         putAccessingRecordToTopic(userRequest);
-
         // 判断当前 API 是否允许用户访问
         if (!userService.isRequestAllowed(userRequest)) {
             String msg = "QPS limit exceeded with " + user.getLimit() + " per minute!";
             String body = Resp.toJSON(Resp.failed(msg));
             return ResponseEntity.status(HttpStatus.OK).body(body);
         }
-
         String body = Resp.toJSON(Resp.ok());
         return ResponseEntity.ok(body);
     }
@@ -105,7 +98,6 @@ public class TrafficController {
         kafkaProducerConfig.sendMessage("access_topic", message);
     }
 
-    // Exception handler for missing request body
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         String body = Resp.toJSON(Resp.failed("Request body is missing or unreadable"));

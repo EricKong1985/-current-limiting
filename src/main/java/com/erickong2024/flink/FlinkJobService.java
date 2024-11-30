@@ -24,8 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.print.attribute.standard.JobName;
 import java.util.Properties;
 
 @Service
@@ -45,7 +43,6 @@ public class FlinkJobService {
     public void startFlinkJob() throws Exception {
         // Flink 环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-
 
         // Kafka 配置
         Properties kafkaProps = new Properties();
@@ -99,8 +96,6 @@ public class FlinkJobService {
                 })
                 // 按 min, userId 和 path 分组
                 .keyBy(0, 1, 2)
-                // 使用 10 秒的时间窗口
-//                .timeWindow(Time.seconds(10))
                 // 对第五个元素（计数）进行求和
                 .sum(4);
 
@@ -125,7 +120,6 @@ public class FlinkJobService {
                             System.out.println("到达限制:" + jsonString);
                             return new ProducerRecord<>("status_topic", jsonString.getBytes());
                         }
-
                     }
                 },
                 kafkaProps,

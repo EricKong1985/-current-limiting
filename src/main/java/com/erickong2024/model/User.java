@@ -1,8 +1,5 @@
 package com.erickong2024.model;
 
-
-
-
 public class User {
 
     private String id;           // 用户ID

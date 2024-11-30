@@ -1,6 +1,5 @@
 package com.erickong2024.model;
 
-
 public class UserRequest {
 
     private String token;           // 用户的 token，用于识别用户身份

@@ -15,7 +15,8 @@ services:
     depends_on:
       - zookeeper
     networks:
-      - flink-kafka-network
+      flink-kafka-network:
+        ipv4_address: 172.18.0.13  # 为 Kafka 容器指定静态 IP
 
   # Zookeeper 服务
   zookeeper:
@@ -23,7 +24,8 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - flink-kafka-network
+      flink-kafka-network:
+        ipv4_address: 172.18.0.11  # 为 Kafka 容器指定静态 IP
 
   # Flink JobManager
   jobmanager:
@@ -34,7 +36,8 @@ services:
     environment:
       - JOB_MANAGER_RPC_ADDRESS=jobmanager
     networks:
-      - flink-kafka-network
+      flink-kafka-network:
+        ipv4_address: 172.18.0.12  # 为 Kafka 容器指定静态 IP
 
   # Flink TaskManager
   taskmanager:
@@ -45,7 +48,8 @@ services:
     depends_on:
       - jobmanager
     networks:
-      - flink-kafka-network
+      flink-kafka-network:
+        ipv4_address: 172.18.0.14  # 为 Kafka 容器指定静态 IP
 
   # Redis 服务
   redis:
@@ -53,8 +57,26 @@ services:
     ports:
       - "6379:6379"  # Redis 端口
     networks:
-      - flink-kafka-network
+      flink-kafka-network:
+        ipv4_address: 172.18.0.15  # 为 Kafka 容器指定静态 IP
+
+  # Kafka UI 服务
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 9001:8080
+    depends_on:
+      - kafka
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+    networks:
+      flink-kafka-network:
+        ipv4_address: 172.18.0.16  # 为 Kafka 容器指定静态 IP
 
 networks:
   flink-kafka-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16  # 自定义子网

@@ -10,7 +10,6 @@
     <packaging>jar</packaging>
 
 
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -35,18 +34,23 @@
             <version>1.13.6</version>
         </dependency>
         <!-- Add Flink Core dependency -->
-    <dependency>
-        <groupId>org.apache.flink</groupId>
-        <artifactId>flink-core</artifactId>
-        <version>1.13.6</version>
-    </dependency>
-    <!-- Add Flink Clients dependency -->
-    <dependency>
-        <groupId>org.apache.flink</groupId>
-        <artifactId>flink-clients_2.12</artifactId>
-        <version>1.13.6</version>
-    </dependency>
-    <!-- Spring Boot dependencies -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-core</artifactId>
+            <version>1.13.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version> <!-- 请根据需要选择版本 -->
+        </dependency>
+        <!-- Add Flink Clients dependency -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_2.12</artifactId>
+            <version>1.13.6</version>
+        </dependency>
+        <!-- Spring Boot dependencies -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

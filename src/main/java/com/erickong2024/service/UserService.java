@@ -25,9 +25,9 @@ public class UserService {
 
     // 示例用户数据（通常从数据库中查询）
     static {
-        userDatabase.put("user1_token", new User("user1", "user1_token", 1000)); // 每分钟最多 1000 次请求
-        userDatabase.put("user2_token", new User("user2", "user2_token", 500));  // 每分钟最多 500 次请求
-        userDatabase.put("user3_token", new User("user3", "user3_token", 500));  // 每分钟最多 500 次请求
+        userDatabase.put("user1_token", new User("1", "user1_token", 1000)); // 每分钟最多 1000 次请求
+        userDatabase.put("user2_token", new User("2", "user2_token", 500));  // 每分钟最多 500 次请求
+        userDatabase.put("user3_token", new User("3", "user3_token", 500));  // 每分钟最多 500 次请求
     }
 
     // 根据 token 获取用户信息

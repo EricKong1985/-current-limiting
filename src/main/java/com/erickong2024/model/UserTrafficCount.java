@@ -4,6 +4,7 @@ package com.erickong2024.model;
 public class UserTrafficCount {
     private String userId;
 
+
     public String getUserId() {
         return userId;
     }
@@ -39,4 +40,12 @@ public class UserTrafficCount {
     private String min;
     private Long count;
     private String path;
+
+
+    public UserTrafficCount(String userId, String min, Integer count, String path) {
+        this.userId = userId;
+        this.min = min;
+        this.count = Long.valueOf(count);
+        this.path = path;
+    }
 }

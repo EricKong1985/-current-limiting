@@ -52,7 +52,7 @@
 6. 假如项目对你有用,请给个Star,谢谢！
 
 
-7. 联系邮箱:eric.cc2009@gmai.com
+7. 联系邮箱:eric.cc2009@gmail.com
 
 
 

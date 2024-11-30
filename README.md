@@ -45,6 +45,14 @@
 
 --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED
 
-5. 假如项目对你有用,请给个Star,谢谢！
+5. 测试运行项目根目录的mock*.bat文件
+
+`mock_api1_get.bat`
+
+6. 假如项目对你有用,请给个Star,谢谢！
+
+
+7. 联系邮箱:eric.cc2009@gmai.com
+
 
 

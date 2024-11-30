@@ -29,7 +29,7 @@ public class FlinkJobService {
     @Value("${spring.kafka.consumer.group-id}")
     private String consumerGroupId;
 
-    @PostConstruct
+//    @PostConstruct
     public void startFlinkJob() throws Exception {
         // Flink 环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();

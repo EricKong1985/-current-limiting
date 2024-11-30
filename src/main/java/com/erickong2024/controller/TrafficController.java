@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.erickong2024.util.StringUtils;
 
 @RestController
-@RequestMapping("/api/traffic")
+@RequestMapping("/current-limiting/")
 public class TrafficController {
 
     @Autowired
@@ -24,15 +24,20 @@ public class TrafficController {
     private UserService userService;
 
     // 处理 API1 的 GET 请求
-    @GetMapping("/access/api1")
+    @GetMapping("/api1")
     public ResponseEntity<String> handleApi1Request(@RequestBody UserRequest userRequest) {
         userRequest.setPath("api1");
         userRequest.setTimestamp(Long.valueOf(StringUtils.getMinutesSince1970()));
         return handleRequest(userRequest);
     }
 
+    @GetMapping("/ok")
+    public ResponseEntity<String> handleApi1Request() {
+        return ResponseEntity.ok("ok");
+    }
+
     // 处理 API2 的 POST 请求
-    @PostMapping("/access/api2")
+    @PostMapping("/api2")
     public ResponseEntity<String> handleApi2Request(@RequestBody UserRequest userRequest) {
         userRequest.setPath("api2");
         userRequest.setTimestamp(Long.valueOf(StringUtils.getMinutesSince1970()));
@@ -40,7 +45,7 @@ public class TrafficController {
     }
 
     // 处理 API3 的 PUT 请求
-    @PutMapping("/access/api3")
+    @PutMapping("/api3")
     public ResponseEntity<String> handleApi3Request(@RequestBody UserRequest userRequest) {
         userRequest.setPath("api3");
         userRequest.setTimestamp(Long.valueOf(StringUtils.getMinutesSince1970()));

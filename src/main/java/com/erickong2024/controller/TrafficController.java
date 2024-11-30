@@ -42,16 +42,21 @@ public class TrafficController {
 
     // 处理 API2 的 POST 请求
     @PostMapping("/api2")
-    public ResponseEntity<String> handleApi2Request(@RequestBody UserRequest userRequest) {
-        userRequest.setPath("api2");
+    public ResponseEntity<String> handleApi2Request(@RequestBody String reqBody,
+                                                    @RequestHeader(value = "token", required = false) String token) {
+        UserRequest userRequest = new UserRequest();
+        userRequest.setPath("api1");
+        userRequest.setToken(token);
         return handleRequest(userRequest);
     }
 
     // 处理 API3 的 PUT 请求
     @PutMapping("/api3")
-    public ResponseEntity<String> handleApi3Request(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<String> handleApi3Request(
+                                                    @RequestHeader(value = "token", required = false) String token) {
+        UserRequest userRequest = new UserRequest();
         userRequest.setPath("api3");
-
+        userRequest.setToken(token);
         return handleRequest(userRequest);
     }
 
